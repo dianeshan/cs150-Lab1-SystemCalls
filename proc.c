@@ -634,6 +634,7 @@ waitpid(int pid, int *status, int options)
   struct proc *p;
   int hasproc = 0;
   
+  //Loop over process table looking for process to run
   acquire(&ptable.lock);
   for(p = ptable.proc; p < &ptable.proc[NPROC]; p++) {
     if (pid != p->pid) {
@@ -674,5 +675,12 @@ waitpid(int pid, int *status, int options)
       
       sleep(p, &ptable.lock);  //DOC: wait-sleep
     }
+  }
+  else {
+    release(&ptable.lock);
+    if (status) {
+      *status = -1;
+    }
+    return -1;
   }
 }

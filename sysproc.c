@@ -94,7 +94,7 @@ int
 sys_exits(void)
 {
   int status; 
-  if (argint(n, &i) < 0) {
+  if (argint(0, &status) < 0) {
     exits(0);
   }
   else {
