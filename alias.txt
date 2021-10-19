@@ -1,0 +1,3 @@
+exit = exits
+wait = waits
+waitpid = waitpid
